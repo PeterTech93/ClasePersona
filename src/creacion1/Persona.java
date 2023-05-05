@@ -133,12 +133,4 @@ public class Persona {
         return nuevaFecha;
     }
 
-    public int getEdadEnFecha(String fecha) {
-        int edad;
-        int anioPersona, anioHoy;
-        anioPersona = Integer.parseInt(fecha.substring(6, fecha.length()));
-        anioHoy = Integer.parseInt(LocalDate.now().toString().substring(6, LocalDate.now().toString().length()));
-        edad = anioHoy - anioPersona;
-    }
-
 }
