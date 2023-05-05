@@ -133,16 +133,24 @@ public class Persona {
         return nuevaFecha;
     }
 
-    public int getEdadEnFecha(String fecha) {
+    public int getEdadEnFecha(String cadenaFecha) {
         int edad;
-        int anioPersona, anioHoy;
-        anioPersona = Integer.parseInt(fecha.substring(6, fecha.length()));
-        anioHoy = Integer.parseInt(LocalDate.now().toString().substring(6, LocalDate.now().toString().length()));
-        edad = anioHoy - anioPersona;
-        System.out.println("Tercera modificacion");
-        System.out.println("Cuarta modificacion");
-        System.out.println("Quinta modificacion");
-        System.out.println("Última modificación");
+
+        if (this.fechaNacimiento == null) {
+            return -1;
+        }
+
+        LocalDate nuevaFecha = generarFecha(cadenaFecha);
+        try {
+            edad = nuevaFecha.getYear() - this.fechaNacimiento.getYear();
+            if (this.fechaNacimiento.getMonthValue() > nuevaFecha.getMonthValue()
+                    || (this.fechaNacimiento.getMonthValue() == nuevaFecha.getMonthValue()
+                    && this.fechaNacimiento.getDayOfMonth() > nuevaFecha.getDayOfMonth())) {
+                edad--;
+            }
+            return edad;
+        } catch (IllegalArgumentException e) {
+            return -1;
+        }
     }
-    
 }
