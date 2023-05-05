@@ -140,6 +140,7 @@ public class Persona {
         anioHoy = Integer.parseInt(LocalDate.now().toString().substring(6, LocalDate.now().toString().length()));
         edad = anioHoy - anioPersona;
         System.out.println("Tercera modificacion");
+        System.out.println("Cuarta modificacion");
     }
     
 }
