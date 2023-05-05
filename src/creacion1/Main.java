@@ -29,21 +29,13 @@ public class Main {
 
             try {
                 Persona persona1 = new Persona(nombre, apellidos, fechaNacimiento);
-                int cantidadFechas = sc.nextInt();
-                sc.nextLine();
-                for (int j = 0; j < cantidadFechas; j++) {
-                    fecha = sc.nextLine();
-                    try {
-                        edad = persona1.getEdadEnFecha(fecha);
-                        if (edad == -1) {
-                            System.out.println(persona1.getNombre() + " " + persona1.getApellidos() + " aun no ha nacido a fecha " + fecha);
-                        } else {
-                            System.out.println(persona1.getNombre() + " " +persona1.getApellidos() + " tendra " + edad + " anyos en fecha " + fecha);
-                        }
-                    } catch (IllegalArgumentException e1) {
-                        System.out.println("ERROR. Procesando siguiente fecha");
-                    }
+                edad = persona1.getEdad();
+                if (edad == -1) {
+                    System.out.println(persona1.getNombre() + " " + persona1.getApellidos() + " aun no ha nacido a dia de hoy");
+                } else {
+                    System.out.println(persona1.getNombre() + " " + persona1.getApellidos() + " tiene " + edad + " anyos a dia de hoy");
                 }
+                
             } catch (IllegalArgumentException e) {
                 System.out.println("ERROR. Procesando siguiente persona");
             }

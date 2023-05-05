@@ -51,6 +51,13 @@ public class Persona {
             } catch (DateTimeParseException e) {
                 throw new IllegalArgumentException();
             }
+        } else if (fechaNacimiento.charAt(4) == fechaNacimiento.charAt(7)){
+            try {
+                fechaCorrecta = LocalDate.parse(fechaNacimiento);
+                return fechaCorrecta;
+            } catch (DateTimeParseException e) {
+                throw new IllegalArgumentException();
+            }
         } else {
             throw new IllegalArgumentException();
         }
@@ -152,5 +159,14 @@ public class Persona {
         } catch (IllegalArgumentException e) {
             return -1;
         }
+    }
+
+    public int getEdad() {
+        if (this.fechaNacimiento == null) {
+            return -1;
+        }
+        int edad;
+        edad = getEdadEnFecha(LocalDate.now().toString());
+        return edad;
     }
 }
