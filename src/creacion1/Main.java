@@ -4,8 +4,8 @@
  */
 package creacion1;
 
-import java.time.format.DateTimeParseException;
 import java.util.Scanner;
+import java.util.Objects;
 
 /**
  * Metodo principal que procesa diferentes personas que introducen o no fecha de
@@ -18,27 +18,45 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int personas = sc.nextInt();
-        int edad;
         sc.nextLine();
-        String nombre, apellidos, fechaNacimiento, fecha;
+        String nombre = "";
+        String apellidos = "";
+        String fechaNacimiento = "";
+        String fecha;
+        boolean personaAsignada = false;
 
-        for (int i = 0; i < personas; i++) {
+        while (!personaAsignada) {
             nombre = sc.nextLine();
             apellidos = sc.nextLine();
             fechaNacimiento = sc.nextLine();
-
             try {
                 Persona persona1 = new Persona(nombre, apellidos, fechaNacimiento);
-                edad = persona1.getEdad();
-                if (edad == -1) {
-                    System.out.println(persona1.getNombre() + " " + persona1.getApellidos() + " aun no ha nacido a dia de hoy");
-                } else {
-                    System.out.println(persona1.getNombre() + " " + persona1.getApellidos() + " tiene " + edad + " anyos a dia de hoy");
-                }
-                
+                personaAsignada = true;
+                personas--;
             } catch (IllegalArgumentException e) {
                 System.out.println("ERROR. Procesando siguiente persona");
+                personas--;
             }
+
+        }
+        Persona persona1 = new Persona(nombre, apellidos, fechaNacimiento);
+        for (int i =0; i < personas; i++) {
+            nombre = sc.nextLine();
+            apellidos = sc.nextLine();
+            fechaNacimiento = sc.nextLine();
+            try {
+                Persona persona2 = new Persona(nombre, apellidos, fechaNacimiento);
+                if (persona1.equals(persona2)) {
+                    System.out.println(persona2.toString() + " y " + persona1.toString() + " son la misma");
+                    persona1 = persona2;
+                } else {
+                    System.out.println(persona2.toString() + " y " + persona1.toString() + " son distintas");
+                    persona1 = persona2;
+                }
+            } catch (IllegalArgumentException e1) {
+                System.out.println("ERROR. Procesando siguiente persona");
+            }
+
         }
     }
 }

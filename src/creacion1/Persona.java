@@ -5,7 +5,9 @@
 package creacion1;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Objects;
 
 /**
  *
@@ -51,7 +53,7 @@ public class Persona {
             } catch (DateTimeParseException e) {
                 throw new IllegalArgumentException();
             }
-        } else if (fechaNacimiento.charAt(4) == fechaNacimiento.charAt(7)){
+        } else if (fechaNacimiento.charAt(4) == fechaNacimiento.charAt(7)) {
             try {
                 fechaCorrecta = LocalDate.parse(fechaNacimiento);
                 return fechaCorrecta;
@@ -169,4 +171,34 @@ public class Persona {
         edad = getEdadEnFecha(LocalDate.now().toString());
         return edad;
     }
+
+    @Override
+    public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        return "Persona{"
+                + "nombre=" + nombre
+                + ", apellidos=" + apellidos
+                + ", fechaNacimiento=" + fechaNacimiento.format(formatter)
+                + "}";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Persona persona = (Persona) obj;
+        return Objects.equals(nombre, persona.nombre)
+                && Objects.equals(apellidos, persona.apellidos)
+                && Objects.equals(fechaNacimiento, persona.fechaNacimiento);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
 }
